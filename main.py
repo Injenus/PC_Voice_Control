@@ -2,13 +2,6 @@ import json, pyaudio
 from vosk import Model, KaldiRecognizer
 from Levenshtein import distance as lev
 import os
-import pyautogui
-import time
-import subprocess
-import webbrowser
-from ctypes import cast, POINTER
-from comtypes import CLSCTX_ALL
-from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 import serial
 import sys
 import pystray
@@ -17,7 +10,7 @@ import threading
 import signal
 from pcvc_control import *
 
-lang_model = 'D:\\PyProjects\\robotic_arm\\vosk-model-small-ru-0.22'
+lang_model = 'vosk-model-small-ru-0.22'
 rate = 16000 if "small" in lang_model else 8000
 model = Model(lang_model)
 rec = KaldiRecognizer(model, rate)

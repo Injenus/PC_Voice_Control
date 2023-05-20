@@ -1,8 +1,8 @@
 <!-- Оглавление -->
-- [RUS](#rus-голосовое-управление-компьютером-без-интернета)
-- [ENG](#eng-offline-voice-control-for-computer)
+- [RUS](#голосовое-управление-компьютером-без-интернета)
+- [ENG](#offline-voice-control-for-computer)
 
-# (RUS) Голосовое управление компьютером без интернета
+# Голосовое управление компьютером без интернета
 
 Этот проект представляет собой программу для голосового управления компьютером без необходимости подключения к интернету. Программа использует микрофон системы по умолчанию для распознавания команд.
 
@@ -24,7 +24,7 @@
 - Отправьте голосовую команду "выход".
 - Щелкните правой кнопкой мыши на значке программы в трее и выберите "Exit" в контекстном меню.
 
-# (ENG) Offline Voice Control for Computer
+# Offline Voice Control for Computer
 
 This project is a program for voice control of a computer without the need for an internet connection. The program utilizes the system's default microphone for command recognition.
 

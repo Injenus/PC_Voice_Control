@@ -1,5 +1,6 @@
 import json, pyaudio
 from vosk import Model, KaldiRecognizer
+import pyaudio
 from Levenshtein import distance as lev
 import os
 import serial
@@ -10,13 +11,21 @@ import threading
 import signal
 from pcvc_control import *
 
-lang_model = 'vosk-model-small-ru-0.22'
-rate = 16000 if "small" in lang_model else 8000
-model = Model(lang_model)
-rec = KaldiRecognizer(model, rate)
+lang_model_ru = 'vosk-model-small-ru-0.22'
+# lang_model_en = 'vosk-model-en-us-0.22-lgraph'
+rate = 16000 if "small" in lang_model_ru else 8000
+model_ru = Model(lang_model_ru)
+# model_en = Model(lang_model_en)
+rec_ru = KaldiRecognizer(model_ru, rate)
+# rec_en = KaldiRecognizer(model_en, rate)
 p = pyaudio.PyAudio()
 stream = p.open(format=pyaudio.paInt16, channels=1, rate=rate, input=True,
-                frames_per_buffer=8000)
+                frames_per_buffer=8000, input_device_index=mic_index())
+# audio = pyaudio.PyAudio()
+# stream = audio.open(format=rate, channels=1, rate=rate, input=True,
+#                     frames_per_buffer=rate // 100, input_device_index=mic_index)
+
+
 stream.start_stream()
 isLive = True
 
@@ -96,6 +105,7 @@ def exit():
     tray_thread.join()
     sys.exit(0)
 
+
 def hibernation(isOk=True, isWarn=False, delay=25):
     ser.write(b'1')
     print("HIBERNATION")
@@ -139,16 +149,30 @@ def sleep_mode(isOk=True, isWarn=False, delay=15):
     if isOk:
         click_left()
 
+
 ############################################
 def listen():
     global time_init, interval
     while isLive:
         if time.time() - time_init < interval:
             data = stream.read(4000, exception_on_overflow=False)
-            if (rec.AcceptWaveform(data)) and (len(data) > 0):
-                answer = json.loads(rec.Result())
-                if answer['text']:
+            flag_ru = (rec_ru.AcceptWaveform(data)) and (len(data) > 0)
+            #flag_en = (rec_en.AcceptWaveform(data)) and (len(data) > 0)
+            # if flag_ru and flag_en:
+            #     answer = json.loads(rec_ru.Result())
+            #     answer_en = json.loads(
+            #         rec_en.Result())  # Преобразование JSON-строки в словарь
+            #     answer.update(answer_en)  # Объединение словарей
+            #     if answer.get('text'):
+            #         yield answer['text']
+            if flag_ru:
+                answer = json.loads(rec_ru.Result())
+                if answer.get('text'):
                     yield answer['text']
+            # elif flag_en:
+            #     answer = json.loads(rec_en.Result())
+            #     if answer.get('text'):
+            #         yield answer['text']
         else:
             yield []
 

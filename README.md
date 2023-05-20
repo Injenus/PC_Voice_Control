@@ -4,7 +4,7 @@
 
 # Голосовое управление компьютером без интернета
 
-Этот проект представляет собой программу для голосового управления компьютером без необходимости подключения к интернету. Программа использует микрофон системы по умолчанию для распознавания команд.
+Этот проект представляет собой программу для голосового управления компьютером без необходимости подключения к интернету. Программа использует микрофон по указанному индексу в системе (получение списка индексов в test.py, указание индекса в pcvc_control.py).
 
 ## Возможности
 
@@ -26,7 +26,7 @@
 
 # Offline Voice Control for Computer
 
-This project is a program for voice control of a computer without the need for an internet connection. The program utilizes the system's default microphone for command recognition.
+This project is a program for voice control of a computer without the need for an internet connection. The program uses the microphone based on the specified index in the system (obtaining a list of indexes in test.py, specifying the index in pcvc_control.py).
 
 ## Features
 

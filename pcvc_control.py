@@ -6,6 +6,12 @@ from ctypes import cast, POINTER
 from comtypes import CLSCTX_ALL
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 
+microphone_index = 1
+
+
+def mic_index():
+    return microphone_index
+
 
 def get_display_size():
     display_width, display_height = pyautogui.size()
@@ -62,6 +68,7 @@ def open_new_tab(url):
 #############   ФУКНЦИИ УПАРВЛЕНИЯ    ####################
 def check():
     pass
+
 
 def mute():
     devices = AudioUtilities.GetSpeakers()
@@ -127,7 +134,6 @@ def lock(isOk=True, isWarn=False, delay=0):
         click_left()
 
 
-
 def pause():
     press_keys(['space'])
 
@@ -152,6 +158,7 @@ def consultant():
 
 def youtube():
     open_new_tab('https://www.youtube.com/')
+
 
 def ozon():
     open_new_tab('https://www.ozon.ru/my/orderlist')
